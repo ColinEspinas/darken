@@ -22,6 +22,7 @@ export default class darken {
 			});
 		}
 
+		// Listen to darken-dark events and apply darkmode on event
 		document.addEventListener('darken-dark', function () {
 			// Adding darkmode class to container or body
 			if (options.container) document.querySelector(options.container).classList.add(options.class);
@@ -36,6 +37,7 @@ export default class darken {
 			}
 		}, false);
 
+		// Listen to darken-light events and apply lightmode on event
 		document.addEventListener('darken-light', function () {
 			// Removing darkmode class to container or body
 			if (options.container) document.querySelector(options.container).classList.remove(options.class);
@@ -50,6 +52,7 @@ export default class darken {
 			}
 		}, false);
 
+		// Get default mode and turn darkmode on/off
 		if (options.default === "light") {
 			this.off();
 		}
@@ -58,17 +61,20 @@ export default class darken {
 		}
 	}
 
+	// Toggle darkmode
 	toggle() {
 		this.dark = !this.dark;
 		if (this.dark) document.dispatchEvent(new Event('darken-dark'));
 		else document.dispatchEvent(new Event('darken-light'));
 	}
 
+	// Set darkmode to active
 	on() {
 		this.dark = true;
 		document.dispatchEvent(new Event('darken-dark'));
 	}
 
+	// Set darkmode to inactive
 	off() {
 		this.dark = false;
 		document.dispatchEvent(new Event('darken-light'));
