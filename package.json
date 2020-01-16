@@ -1,0 +1,14 @@
+{
+  "name": "darken",
+  "version": "1.0.0",
+  "description": "Darkmode made easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Colin Espinas",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/ColinEspinas/darken.git"
+  }
+}
