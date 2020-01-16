@@ -12,6 +12,8 @@ export default class darken {
 			variables: {},
 		}, options);
 
+		this.dark = false;
+
 		// Add click listener on toggle element if possible
 		if (options.toggle) {
 			document.querySelector(options.toggle).addEventListener('click', e => {
