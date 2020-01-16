@@ -3,7 +3,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c113e5acfef64430ae0db6917a78b612)](https://app.codacy.com/manual/ColinEspinas/darken?utm_source=github.com&utm_medium=referral&utm_content=ColinEspinas/darken&utm_campaign=Badge_Grade_Dashboard)
 [![Issue Badge](https://img.shields.io/github/issues/colinespinas/darken)](https://github.com/ColinEspinas/darken/issues)
 [![Licence Badge](https://img.shields.io/github/license/colinespinas/darken)](https://github.com/ColinEspinas/darken/blob/master/LICENSE)
-[![Demo badge](https://img.shields.io/badge/-Demo%20Available-brightgreen)]()
+[![Demo badge](https://img.shields.io/badge/-Demo%20Available-brightgreen)](https://colinespinas.github.io/darken/)
 
 🌑 Darkmode made easy
 
