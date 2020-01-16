@@ -2,13 +2,23 @@
   "name": "darken",
   "version": "1.0.0",
   "description": "Darkmode made easy",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "microbundle --sourcemap false",
+    "dev": "microbundle watch"
   },
   "author": "Colin Espinas",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/ColinEspinas/darken.git"
-  }
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "eslint": "^6.8.0",
+    "microbundle": "^0.11.0"
+  },
+  "source": "src/index.js",
+  "main": "dist/darken.js",
+  "browser": "dist/darken.umd.js",
+  "module": "dist/darken.mjs",
+  "unpkg": "dist/darken.umd.js"
 }
