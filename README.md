@@ -5,7 +5,15 @@
 [![Licence Badge](https://img.shields.io/github/license/colinespinas/darken)](https://github.com/ColinEspinas/darken/blob/master/LICENSE)
 [![Demo badge](https://img.shields.io/badge/-Demo%20Available-brightgreen)](https://colinespinas.github.io/darken/)
 
-🌑 Darkmode made easy
+🌑 Dark mode made easy.
+
+<!-- FEATURES -->
+## Features
+
+* Easy control over your dark mode
+* Custom class on dark mode
+* Switch CSS variables values on light/dark modes
+* Save user preference to local storage
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -54,7 +62,7 @@ Here is a basic usage of darken:
 ```html
 <!-- index.html -->
 
-<button id="darkmode-button">Toggle darkmode</button>
+<button id="darkmode-button">Toggle dark mode</button>
 
 <script src="path/to/darken"></script>
 <script>
@@ -79,6 +87,7 @@ const defaultOptions = {
 	container: null,
 	default: "light",
 	toggle: null,
+	remember: "darken-mode",
 	class: "darken",
 	variables: {},
 }
@@ -87,9 +96,9 @@ const defaultOptions = {
 ### container
 *Type: `String`*, *Default: `null`*
 
-Element selector to the container of darken. The darkmode will be applied only to the selected container.
+Element selector to the container of darken. The dark mode will be applied only to the selected container.
 
-If the value is left to ``null`, the document element will be selected instead.
+If the value is left to `null`, the document element will be selected instead.
 
 ### default
 *Type: `String`*, *Default: `"light"`*
@@ -101,23 +110,30 @@ Defines the default mode on page load.
 
 Element selector to the toggle button, the selected element will call the `toggle` method on click.
 
+### remember
+*Type: `String`*, *Default: `"darken-mode"`*
+
+Name of the value stored in the browser local storage, this value contains the active mode ("dark" or "light").
+
+If this option is set to `null` the active mode is not stored.
+
 ### class
 *Type: `String`*, *Default: `"darken"`*
 
-Class that will be added to the selected container when the darkmode is active. The class is removed of the selected container once the darkmode is disabled.
+Class that will be added to the selected container when the dark Fmode is active. The class is removed of the selected container once the dark mode is disabled.
 
 If no container is selected, the class will be added to the `body` element instead.
 
 ### variables
 *Type: `Object`*, *Default: `{}`*
 
-List of CSS variables that will change when the darkmode is active.
+List of CSS variables that will change when the dark mode is active.
 
-The keys of the object are the variables names, the value are arrays where the 1th index is the value the variable will take in lightmode and the 2nd index the value the variable will take in darkmode.
+The keys of the object are the variables names, the value are arrays where the 1th index is the value the variable will take in lightmode and the 2nd index the value the variable will take in dark mode.
 
 ```javascript
 variables: {
-	"--name-of-the-variable": ["lightmode value", "darkmode value"],
+	"--name-of-the-variable": ["light mode value", "dark mode value"],
 	"--background-color": ["white", "black"],
 }
 ```
@@ -134,7 +150,7 @@ const darkmode = new darken(options);
 ### toggle()
 *Return: `none`*
 
-Toggles darkmode.
+Toggles dark mode.
 
 ```javascript
 darkmode.toggle();
@@ -143,7 +159,7 @@ darkmode.toggle();
 ### on()
 *Return: `none`*
 
-Enables darkmode.
+Enables dark mode.
 
 ```javascript
 darkmode.on();
@@ -152,7 +168,7 @@ darkmode.on();
 ### off()
 *Return: `none`*
 
-Disables darkmode.
+Disables dark mode.
 
 ```javascript
 darkmode.off();
@@ -180,6 +196,8 @@ darken is distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 ## Contact
+[![Buy me a coffee badge](https://img.shields.io/badge/-Buy%20me%20a%20coffee-important?logo=buy%20me%20a%20coffee&logoColor=white)](https://www.buymeacoffee.com/ColinEspinas)
+[![LinkedIn badge](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/colin-espinas-9739b8178/l)
 
 Colin Espinas - [Website](https://colinespinas.com) - contact@colinespinas.com
 

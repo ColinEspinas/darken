@@ -4,7 +4,7 @@
   "description": "Darkmode made easy",
   "scripts": {
     "build": "microbundle --sourcemap false",
-    "dev": "microbundle watch"
+    "dev": "microbundle watch --sourcemap false"
   },
   "author": "Colin Espinas",
   "license": "MIT",
