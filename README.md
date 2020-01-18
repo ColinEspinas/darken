@@ -144,7 +144,18 @@ variables: {
 The `darken` class is the entry point to the library.
 
 ```javascript
-const darkmode = new darken(options);
+const darkmode = new darken(options, callback);
+```
+
+See details about options [above](#options). The `options` are optional.
+
+The `callback` method will be called at every mode switch with a `active` boolean parameter. The `callback` is optional.
+
+```javascript
+const darkmode = new darken(function(active) {
+	if (active) console.log("Dark mode is active");
+	else console.log("Dark mode is inactive");
+});
 ```
 
 ### toggle()
@@ -197,7 +208,7 @@ darken is distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 [![Buy me a coffee badge](https://img.shields.io/badge/-Buy%20me%20a%20coffee-important?logo=buy%20me%20a%20coffee&logoColor=white)](https://www.buymeacoffee.com/ColinEspinas)
-[![LinkedIn badge](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/colin-espinas-9739b8178/l)
+[![LinkedIn badge](https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555)](https://www.linkedin.com/in/colin-espinas-9739b8178/l)
 
 Colin Espinas - [Website](https://colinespinas.com) - contact@colinespinas.com
 

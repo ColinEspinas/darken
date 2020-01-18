@@ -1,7 +1,12 @@
 
 // Darken class
 export default class darken {
-	constructor(options) {
+	constructor(options, callback) {
+
+		if (typeof options === "function") {
+			callback = options;
+			options = {};
+		}
 
 		// Default Options
 		options = Object.assign({
@@ -46,6 +51,8 @@ export default class darken {
 			if (options.remember) {
 				localStorage.setItem(options.remember, this.dark ? "dark" : "light");
 			}
+			// Call callback giving the active mode as parameter
+			if (typeof callback === "function") callback(this.dark);
 		}, false);
 
 		// Listen to darken-light events and apply light mode on event
@@ -65,6 +72,8 @@ export default class darken {
 			if (options.remember) {
 				localStorage.setItem(options.remember, this.dark ? "dark" : "light");
 			}
+			// Call callback giving the active mode as parameter
+			if (typeof callback === "function") callback(this.dark);
 		}, false);
 
 		// Get default mode and turn dark mode on/off
