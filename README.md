@@ -197,7 +197,7 @@ darken is distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 [![Buy me a coffee badge](https://img.shields.io/badge/-Buy%20me%20a%20coffee-important?logo=buy%20me%20a%20coffee&logoColor=white)](https://www.buymeacoffee.com/ColinEspinas)
-[![LinkedIn badge](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)](https://www.linkedin.com/in/colin-espinas-9739b8178/l)
+[![LinkedIn badge](https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555)](https://www.linkedin.com/in/colin-espinas-9739b8178/l)
 
 Colin Espinas - [Website](https://colinespinas.com) - contact@colinespinas.com
 
