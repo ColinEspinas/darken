@@ -14,6 +14,7 @@ export default class darken {
 			default: "light",
 			toggle: null,
 			remember: "darken-mode",
+			usePrefersColorScheme: true,
 			class: "darken",
 			variables: {},
 		}, options);
@@ -21,8 +22,36 @@ export default class darken {
 		this.dark = false;
 
 		// Get preference from local storage
-		if (options.remember && localStorage.getItem(options.remember)) {
-			options.default = localStorage.getItem(options.remember);
+		if (options.remember) {
+			if (localStorage.getItem(options.remember)) {
+				options.default = localStorage.getItem(options.remember);
+			}
+			// If no preference is found in storage
+			else if (options.usePrefersColorScheme) {
+				// Use prefers-color-scheme media query
+				if (window.matchMedia('(prefers-color-scheme: dark)')) {
+					options.default = "dark";
+				}
+				else if (window.matchMedia('(prefers-color-scheme: light)')) {
+					options.default = "light";
+				}
+			}
+		}
+		else if (options.usePrefersColorScheme) {
+			// Use prefers-color-scheme media query
+			if (window.matchMedia('(prefers-color-scheme: dark)')) {
+				options.default = "dark";
+			}
+			else if (window.matchMedia('(prefers-color-scheme: light)')) {
+				options.default = "light";
+			}
+			// Add listeners on prefers-color-scheme media query
+			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+				if (e.matches) this.on();
+			});
+			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => {
+				if (e.matches) this.off();
+			});
 		}
 
 		// Add click listener on toggle element if possible

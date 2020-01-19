@@ -4,7 +4,8 @@ export default class darken {
     container: string | null;
     default: string;
     toggle: string | null;
-    remember: string;
+    remember: string | null;
+    usePrefersColorScheme: boolean;
     class: string;
     variables: object;
   }, callback?: (active: boolean) => void);
