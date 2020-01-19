@@ -14,6 +14,7 @@ export default class darken {
 			default: "light",
 			toggle: null,
 			remember: "darken-mode",
+			usePrefersColorScheme: true,
 			class: "darken",
 			variables: {},
 		}, options);
@@ -21,8 +22,36 @@ export default class darken {
 		this.dark = false;
 
 		// Get preference from local storage
-		if (options.remember && localStorage.getItem(options.remember)) {
-			options.default = localStorage.getItem(options.remember);
+		if (options.remember) {
+			if (localStorage.getItem(options.remember)) {
+				options.default = localStorage.getItem(options.remember);
+			}
+			// If no preference is found in storage
+			else if (options.usePrefersColorScheme) {
+				// Use prefers-color-scheme media query
+				if (window.matchMedia('(prefers-color-scheme: dark)')) {
+					options.default = "dark";
+				}
+				else if (window.matchMedia('(prefers-color-scheme: light)')) {
+					options.default = "light";
+				}
+			}
+		}
+		else if (options.usePrefersColorScheme) {
+			// Use prefers-color-scheme media query
+			if (window.matchMedia('(prefers-color-scheme: dark)')) {
+				options.default = "dark";
+			}
+			else if (window.matchMedia('(prefers-color-scheme: light)')) {
+				options.default = "light";
+			}
+			// Add listeners on prefers-color-scheme media query
+			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+				if (e.matches) this.on();
+			});
+			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => {
+				if (e.matches) this.off();
+			});
 		}
 
 		// Add click listener on toggle element if possible
@@ -45,7 +74,10 @@ export default class darken {
 			// Loop through CSS variables
 			for (let [key, value] of Object.entries(options.variables)) {
 				// Set CSS variable on dark value
-				element.style.setProperty(key, value[1]);
+				if (value && typeof value === "object") {
+					if (Array.isArray(value)) element.style.setProperty(key, value[1]);
+					else element.style.setProperty(key, value.dark);
+				}
 			}
 			// Set active mode in local storage
 			if (options.remember) {
@@ -66,7 +98,10 @@ export default class darken {
 			// Loop through CSS variables
 			for (let [key, value] of Object.entries(options.variables)) {
 				// Set CSS variable on light value
-				element.style.setProperty(key, value[0]);
+				if (value && typeof value === "object") {
+					if (Array.isArray(value)) element.style.setProperty(key, value[0]);
+					else element.style.setProperty(key, value.light);
+				}
 			}
 			// Set active mode in local storage
 			if (options.remember) {

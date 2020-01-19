@@ -14,6 +14,7 @@
 * Easy control over your dark mode
 * Custom class on dark mode
 * Switch CSS variables values on light/dark modes
+* Use prefers-color-scheme to get user preference
 * Save user preference to local storage
 
 Check the [demo](https://colinespinas.github.io/darken/) to get a live exemple.
@@ -91,6 +92,7 @@ const defaultOptions = {
 	default: "light",
 	toggle: null,
 	remember: "darken-mode",
+	usePrefersColorScheme: true,
 	class: "darken",
 	variables: {},
 }
@@ -120,6 +122,13 @@ Name of the value stored in the browser local storage, this value contains the a
 
 If this option is set to `null` the active mode is not stored.
 
+### usePrefersColorScheme
+*Type: `Boolean`*, *Default: `true`*
+
+If `true` the `prefers-color-scheme` media query will be used to determine the default mode.
+
+If the `remember` option is active, this will only be used if no active mode is stored (in most case the first time a user comes to the app/website). If the `remember` option is not active then a listener will be added to the `prefers-color-scheme` media query for live update.
+
 ### class
 *Type: `String`*, *Default: `"darken"`*
 
@@ -132,7 +141,7 @@ If no container is selected, the class will be added to the `body` element inste
 
 List of CSS variables that will change when the dark mode is active.
 
-The keys of the object are the variables names, the value are arrays where the 1th index is the value the variable will take in lightmode and the 2nd index the value the variable will take in dark mode.
+The keys of the object are the variables names, the value are arrays where the 1th index is the value the variable will take in lightmode and the 2nd index the value the variable will take in dark mode. This is the most compact way to use variables.
 
 ```javascript
 variables: {
@@ -140,6 +149,22 @@ variables: {
 	"--background-color": ["white", "black"],
 }
 ```
+
+If you prefer, you can use an object based syntax. This syntax is more clear but less compact.
+
+```javascript
+variables: {
+	"--name-of-the-variable": {
+		light: "light mode value",
+		dark: "dark mode value"
+	},
+	"--background-color": {
+		light: "white", 
+		dark: "black"
+	},
+}
+```
+
 
 
 ## API
