@@ -45,7 +45,10 @@ export default class darken {
 			// Loop through CSS variables
 			for (let [key, value] of Object.entries(options.variables)) {
 				// Set CSS variable on dark value
-				element.style.setProperty(key, value[1]);
+				if (value && typeof value === "object") {
+					if (Array.isArray(value)) element.style.setProperty(key, value[1]);
+					else element.style.setProperty(key, value.dark);
+				}
 			}
 			// Set active mode in local storage
 			if (options.remember) {
@@ -66,7 +69,10 @@ export default class darken {
 			// Loop through CSS variables
 			for (let [key, value] of Object.entries(options.variables)) {
 				// Set CSS variable on light value
-				element.style.setProperty(key, value[0]);
+				if (value && typeof value === "object") {
+					if (Array.isArray(value)) element.style.setProperty(key, value[0]);
+					else element.style.setProperty(key, value.light);
+				}
 			}
 			// Set active mode in local storage
 			if (options.remember) {
