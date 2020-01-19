@@ -1,9 +1,10 @@
 # darken
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c113e5acfef64430ae0db6917a78b612)](https://app.codacy.com/manual/ColinEspinas/darken?utm_source=github.com&utm_medium=referral&utm_content=ColinEspinas/darken&utm_campaign=Badge_Grade_Dashboard)
+[![Size badge](https://img.shields.io/bundlephobia/min/darken)](https://bundlephobia.com/result?p=darken)
+[![Npm badge](https://img.shields.io/npm/v/darken)](https://www.npmjs.com/package/darken)
 [![Issue Badge](https://img.shields.io/github/issues/colinespinas/darken)](https://github.com/ColinEspinas/darken/issues)
 [![Licence Badge](https://img.shields.io/github/license/colinespinas/darken)](https://github.com/ColinEspinas/darken/blob/master/LICENSE)
-[![Demo badge](https://img.shields.io/badge/-Demo%20Available-brightgreen)](https://colinespinas.github.io/darken/)
 
 🌑 Dark mode made easy.
 
@@ -14,6 +15,8 @@
 * Custom class on dark mode
 * Switch CSS variables values on light/dark modes
 * Save user preference to local storage
+
+Check the [demo](https://colinespinas.github.io/darken/) to get a live exemple.
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
