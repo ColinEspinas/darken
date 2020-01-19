@@ -1,6 +1,6 @@
 {
   "name": "darken",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Darkmode made easy",
   "scripts": {
     "build": "microbundle --sourcemap false",
