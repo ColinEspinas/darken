@@ -29,22 +29,12 @@ export default class darken {
 			// If no preference is found in storage
 			else if (options.usePrefersColorScheme) {
 				// Use prefers-color-scheme media query
-				if (window.matchMedia('(prefers-color-scheme: dark)')) {
-					options.default = "dark";
-				}
-				else if (window.matchMedia('(prefers-color-scheme: light)')) {
-					options.default = "light";
-				}
+				options.default = this.__checkMatchMedia() || options.default
 			}
 		}
 		else if (options.usePrefersColorScheme) {
 			// Use prefers-color-scheme media query
-			if (window.matchMedia('(prefers-color-scheme: dark)')) {
-				options.default = "dark";
-			}
-			else if (window.matchMedia('(prefers-color-scheme: light)')) {
-				options.default = "light";
-			}
+			options.default = this.__checkMatchMedia() || options.default
 			// Add listeners on prefers-color-scheme media query
 			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
 				if (e.matches) this.on();
@@ -56,11 +46,7 @@ export default class darken {
 
 		// Add click listener on toggle element if possible
 		if (options.toggle) {
-			document.querySelector(options.toggle).addEventListener('click', e => {
-				e.preventDefault();
-				// Toggles dark mode
-				this.toggle();
-			});
+			document.querySelector(options.toggle).addEventListener('click', this.__handleClick);
 		}
 
 		// Listen to darken-dark events and apply dark mode on event
@@ -118,6 +104,25 @@ export default class darken {
 		else if (options.default === "dark") {
 			this.on();
 		}
+	}
+
+	// handle click on toggle button
+	__handleClick(e) {
+		e.preventDefault();
+		// Toggles dark mode
+		this.toggle();
+	}
+
+	// checks match media and return corresponding default
+	__checkMatchMedia() {
+		if (window.matchMedia('(prefers-color-scheme: dark)')) {
+			return "dark";
+		}
+		else if (window.matchMedia('(prefers-color-scheme: light)')) {
+			return "light";
+		}
+
+		return undefined
 	}
 
 	// Toggle dark mode
