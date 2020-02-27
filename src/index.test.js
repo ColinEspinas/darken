@@ -5,8 +5,10 @@ const localStorageMock = {
     setItem: jest.fn(),
     clear: jest.fn()
 };
+// eslint-disable-next-line no-undef
 global.localStorage = localStorageMock;
 
+// eslint-disable-next-line no-undef
 global.window = {};
 const mockAddListener = jest.fn();
 Object.defineProperty(window, 'matchMedia', {
@@ -27,11 +29,12 @@ const documentMock = {
     addEventListener: jest.fn(),
     dispatchEvent: jest.fn()
 };
+// eslint-disable-next-line no-undef
 global.document = documentMock;
 const mockAddEventListener = jest.fn();
 Object.defineProperty(document, 'querySelector', {
     writable: true,
-    value: jest.fn().mockImplementation(query => ({
+    value: jest.fn().mockImplementation(() => ({
         addEventListener: mockAddEventListener,
         removeEventListener: jest.fn(),
         dispatchEvent: jest.fn(),
@@ -39,6 +42,7 @@ Object.defineProperty(document, 'querySelector', {
 });
 
 const EventMock = jest.fn();
+// eslint-disable-next-line no-undef
 global.Event = EventMock;
 
 describe('Darken Class', () => {
@@ -135,7 +139,7 @@ describe('Darken Class', () => {
             return true;
         })
 
-        const darken = new Darken({
+        new Darken({
             remember: 'darken-mode',
             usePrefersColorScheme: true
         });
@@ -361,7 +365,7 @@ describe('Darken Class', () => {
         })
 
         test('It should return undefined if none was found', () => {
-            window.matchMedia.mockImplementation((item) => {
+            window.matchMedia.mockImplementation(() => {
                 return false;
             })
 
