@@ -27,6 +27,7 @@ Check the [demo](https://colinespinas.github.io/darken/) to get a live exemple.
 	* [Basic](#basic)
 	* [Options](#options)
 	* [API](#api)
+* [Testing](#testing)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
