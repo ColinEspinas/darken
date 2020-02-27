@@ -213,6 +213,18 @@ Disables dark mode.
 darkmode.off();
 ```
 
+<!-- TEST -->
+## Testing
+
+You can launch tests and generate a coverage report using the following npm command :
+```sh
+npm test
+```
+If you want to test while developing, another command triggers the watch mode (But it does not generate coverage report) :
+```sh
+npm run test:watch
+```
+
 <!-- CONTRIBUTING -->
 ## Contributing
 

@@ -5,8 +5,8 @@
   "scripts": {
     "build": "microbundle --sourcemap false",
     "dev": "microbundle watch --sourcemap false",
-    "test": "jest --watch --coverage=false",
-    "test:final": "jest --coverage=true"
+    "test": "jest --coverage=true",
+    "test:watch": "jest --watch --coverage=false"
   },
   "author": "Colin Espinas",
   "license": "MIT",
