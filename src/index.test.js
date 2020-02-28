@@ -27,7 +27,18 @@ Object.defineProperty(window, 'matchMedia', {
 
 const documentMock = {
     addEventListener: jest.fn(),
-    dispatchEvent: jest.fn()
+    dispatchEvent: jest.fn(),
+    body: {
+        classList: {
+            add: jest.fn(),
+            remove: jest.fn()
+        }
+    },
+    documentElement: {
+        style: {
+            setProperty: jest.fn()
+        }
+    }
 };
 // eslint-disable-next-line no-undef
 global.document = documentMock;
@@ -38,12 +49,26 @@ Object.defineProperty(document, 'querySelector', {
         addEventListener: mockAddEventListener,
         removeEventListener: jest.fn(),
         dispatchEvent: jest.fn(),
+        classList: {
+            remove: jest.fn(),
+            add: jest.fn()
+        }
     })),
 });
 
 const EventMock = jest.fn();
 // eslint-disable-next-line no-undef
 global.Event = EventMock;
+
+const defaultOptions = {
+    container: null,
+    default: "light",
+    toggle: null,
+    remember: "darken-mode",
+    usePrefersColorScheme: true,
+    class: "darken",
+    variables: {},
+}
 
 describe('Darken Class', () => {
 
@@ -400,5 +425,212 @@ describe('Darken Class', () => {
 
             expect(preventDefaultMock.preventDefault.mock.calls.length).toBe(1)
         })
+    })
+
+    describe('__handleDarkenEvent', () => {
+        test('Should use body when no container is specified', () => {
+            const darken = new Darken();
+
+            darken.__handleDarkenEvent({
+                container: null,
+                default: "light",
+                toggle: null,
+                remember: "darken-mode",
+                usePrefersColorScheme: true,
+                class: "darken",
+                variables: {},
+            }, jest.fn(), 'add')()
+
+            expect(document.body.classList.add.mock.calls.length).toBe(1)
+        })
+
+        test('Should use the correct action type add when add is passed', () => {
+            const darken = new Darken();
+
+            darken.__handleDarkenEvent(defaultOptions, jest.fn(), 'add')()
+
+            expect(document.body.classList.add.mock.calls.length).toBe(1)
+        })
+
+        test('Should use the correct action type remove when remove is passed', () => {
+            const darken = new Darken();
+
+            darken.__handleDarkenEvent(defaultOptions, jest.fn(), 'remove')()
+
+            expect(document.body.classList.remove.mock.calls.length).toBe(1)
+        })
+
+        test('Should use the query selector when contained is specified', () => {
+            const darken = new Darken();
+
+            //reseting mock to not be influenced by constructor
+            document.querySelector.mockClear();
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                container: '#test'
+            }), jest.fn(), 'remove')()
+
+            expect(document.querySelector.mock.calls.length > 0).toBe(true)
+        })
+
+        test('Should not use query selector when no container defined', () => {
+            const darken = new Darken();
+
+            //reseting mock to not be influenced by constructor
+            document.querySelector.mockClear();
+            darken.__handleDarkenEvent(Object.assign(defaultOptions), jest.fn(), 'remove')()
+
+            expect(document.querySelector.mock.calls.length).toBe(0)
+        })
+
+        test('Should add properties in compact mode with light values', () => {
+            const darken = new Darken();
+
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                variables: {
+                    "--primary-color": ["#ffffff", "#000000"],
+                    "--secondary-color": ["#000000", "#ffffff"],
+                }
+            }), jest.fn(), 'remove')()
+
+            expect(document.documentElement.style.setProperty.mock.calls).toEqual([
+                ['--primary-color', '#ffffff'],
+                ['--secondary-color', '#000000']
+            ])
+        })
+
+        test('Should add properties in compact mode with dark values', () => {
+            const darken = new Darken({
+                default: 'dark'
+            });
+
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                variables: {
+                    "--primary-color": ["#ffffff", "#000000"],
+                    "--secondary-color": ["#000000", "#ffffff"],
+                }
+            }), jest.fn(), 'remove')()
+
+            expect(document.documentElement.style.setProperty.mock.calls).toEqual([
+                ['--primary-color', '#000000'],
+                ['--secondary-color', '#ffffff']
+            ])
+        })
+
+        test('Should add properties in object mode with light values', () => {
+            const darken = new Darken();
+
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                variables: {
+                    "--primary-color": {
+                        light: '#ffffff',
+                        dark: '#000000'
+                    },
+                    "--secondary-color": {
+                        light: '#000000',
+                        dark: '#ffffff'
+                    },
+                }
+            }), jest.fn(), 'remove')()
+
+            expect(document.documentElement.style.setProperty.mock.calls).toEqual([
+                ['--primary-color', '#ffffff'],
+                ['--secondary-color', '#000000']
+            ])
+        })
+
+        test('Should add properties in object mode with dark values', () => {
+            const darken = new Darken({
+                default: 'dark'
+            });
+
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                variables: {
+                    "--primary-color": {
+                        light: '#ffffff',
+                        dark: '#000000'
+                    },
+                    "--secondary-color": {
+                        light: '#000000',
+                        dark: '#ffffff'
+                    },
+                }
+            }), jest.fn(), 'remove')()
+
+            expect(document.documentElement.style.setProperty.mock.calls).toEqual([
+                ['--primary-color', '#000000'],
+                ['--secondary-color', '#ffffff']
+            ])
+        })
+
+        test('Should save current state to localStorage if remember is set', () => {
+            const darken = new Darken({
+                default: 'dark'
+            });
+
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                variables: {
+                    "--primary-color": {
+                        light: '#ffffff',
+                        dark: '#000000'
+                    },
+                    "--secondary-color": {
+                        light: '#000000',
+                        dark: '#ffffff'
+                    },
+                }
+            }), jest.fn(), 'remove')()
+
+            expect(localStorage.setItem.mock.calls).toEqual([
+                ['darken-mode', 'dark']
+            ])
+        })
+
+        test('Should not save current state to localStorage if remember is not set', () => {
+            const darken = new Darken({
+                default: 'dark',
+            });
+
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                remember: false,
+                variables: {
+                    "--primary-color": {
+                        light: '#ffffff',
+                        dark: '#000000'
+                    },
+                    "--secondary-color": {
+                        light: '#000000',
+                        dark: '#ffffff'
+                    },
+                }
+            }), jest.fn(), 'remove')()
+
+            expect(localStorage.setItem.mock.calls.length).toEqual(0)
+        })
+
+        test('Should call callback if valid type', () => {
+            const callback = jest.fn();
+            const darken = new Darken({
+                default: 'dark'
+            });
+
+            darken.__handleDarkenEvent(Object.assign({}, defaultOptions, {
+                remember: false,
+                variables: {
+                    "--primary-color": {
+                        light: '#ffffff',
+                        dark: '#000000'
+                    },
+                    "--secondary-color": {
+                        light: '#000000',
+                        dark: '#ffffff'
+                    },
+                }
+            }), callback, 'remove')()
+
+            expect(callback.mock.calls).toEqual([
+                [true]
+            ])
+        })
+
     })
 })
