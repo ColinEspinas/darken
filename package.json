@@ -4,7 +4,9 @@
   "description": "Darkmode made easy",
   "scripts": {
     "build": "microbundle --sourcemap false",
-    "dev": "microbundle watch --sourcemap false"
+    "dev": "microbundle watch --sourcemap false",
+    "test": "jest --coverage=true",
+    "test:watch": "jest --watch --coverage=false"
   },
   "author": "Colin Espinas",
   "license": "MIT",
@@ -12,7 +14,12 @@
     "url": "https://github.com/ColinEspinas/darken.git"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
     "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.0",
+    "jest": "^25.1.0",
     "microbundle": "^0.11.0"
   },
   "source": "src/index.js",

@@ -27,6 +27,7 @@ Check the [demo](https://colinespinas.github.io/darken/) to get a live exemple.
 	* [Basic](#basic)
 	* [Options](#options)
 	* [API](#api)
+* [Testing](#testing)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
@@ -211,6 +212,18 @@ Disables dark mode.
 
 ```javascript
 darkmode.off();
+```
+
+<!-- TEST -->
+## Testing
+
+You can launch tests and generate a coverage report using the following npm command :
+```sh
+npm test
+```
+If you want to test while developing, another command triggers the watch mode (But it does not generate coverage report) :
+```sh
+npm run test:watch
 ```
 
 <!-- CONTRIBUTING -->
