@@ -98,10 +98,10 @@ export default class darken {
 
 	// checks match media and return corresponding default
 	__checkMatchMedia() {
-		if (window.matchMedia('(prefers-color-scheme: dark)')) {
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			return "dark";
 		}
-		else if (window.matchMedia('(prefers-color-scheme: light)')) {
+		else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
 			return "light";
 		}
 
