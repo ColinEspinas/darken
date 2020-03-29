@@ -33,5 +33,11 @@
   "browser": "dist/darken.umd.js",
   "module": "dist/darken.mjs",
   "unpkg": "dist/darken.umd.js",
-  "dependencies": {}
+  "dependencies": {},
+  "keywords": [
+    "dark", 
+    "mode", 
+    "darkmode", 
+    "darken"
+  ]
 }

@@ -6,7 +6,9 @@
 [![Issue Badge](https://img.shields.io/github/issues/colinespinas/darken)](https://github.com/ColinEspinas/darken/issues)
 [![Licence Badge](https://img.shields.io/github/license/colinespinas/darken)](https://github.com/ColinEspinas/darken/blob/master/LICENSE)
 
-🌑 Dark mode made easy.
+A **lightweight and cross-browser** library that allows you to easely **manage your dark mode** for your websites and applications. 
+
+Written in plain vanilla javascript.
 
 <!-- FEATURES -->
 ## Features
@@ -15,6 +17,7 @@
 * Custom class on dark mode
 * Switch CSS variables values on light/dark modes
 * Use prefers-color-scheme to get user preference
+* Use timestamps to change modes at chosen times
 * Save user preference to local storage
 
 Check the [demo](https://colinespinas.github.io/darken/) to get a live exemple.
@@ -141,8 +144,8 @@ If the `usePrefersColorScheme` option is active, this option will not be used.
 
 ```javascript
 timestamps: {
-		dark: "20:00",
-		light: "6:00",
+	dark: "20:00",
+	light: "6:00",
 }
 ```
 
