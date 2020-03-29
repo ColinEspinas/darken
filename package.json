@@ -22,6 +22,11 @@
     "jest": "^25.1.0",
     "microbundle": "^0.11.0"
   },
+  "files": [
+    "dist/**/*",
+    "src/index.d.ts",
+    "src/index.js"
+  ],
   "source": "src/index.js",
   "types": "src/index.d.ts",
   "main": "dist/darken.js",
