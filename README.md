@@ -24,9 +24,8 @@ Check the [demo](https://colinespinas.github.io/darken/) to get a live exemple.
 
 * [Getting Started](#getting-started)
 * [Usage](#usage)
-	* [Basic](#basic)
-	* [Options](#options)
-	* [API](#api)
+* [Options](#options)
+* [API](#api)
 * [Testing](#testing)
 * [Contributing](#contributing)
 * [License](#license)
@@ -61,8 +60,6 @@ const darkmode = new darken();
 
 ## Usage
 
-### Basic
-
 Here is a basic usage of darken:
 ```html
 <!-- index.html -->
@@ -94,6 +91,7 @@ const defaultOptions = {
 	toggle: null,
 	remember: "darken-mode",
 	usePrefersColorScheme: true,
+	timestamps: {},
 	class: "darken",
 	variables: {},
 }
@@ -129,6 +127,24 @@ If this option is set to `null` the active mode is not stored.
 If `true` the `prefers-color-scheme` media query will be used to determine the default mode.
 
 If the `remember` option is active, this will only be used if no active mode is stored (in most case the first time a user comes to the app/website). If the `remember` option is not active then a listener will be added to the `prefers-color-scheme` media query for live update.
+
+### timestamps
+*Type: `Object`*, *Default: `{}`*
+
+Define a timestamps mode switch to start light and dark modes at given times of the day.
+
+There is 2 keys to the object, `dark` and `light`, the values of those keys are defining the times (using the format `<hours>:<minutes>`) at wich the corresponding mode will start being active.
+
+If the `remember` option is active, this will only be used if no active mode is stored (in most case the first time a user comes to the app/website). 
+
+If the `usePrefersColorScheme` option is active, this option will not be used.
+
+```javascript
+timestamps: {
+		dark: "20:00",
+		light: "6:00",
+}
+```
 
 ### class
 *Type: `String`*, *Default: `"darken"`*

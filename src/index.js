@@ -33,6 +33,7 @@ export default class darken {
 				options.default = this.__checkMatchMedia() || options.default
 			}
 			else if (Object.keys(options.timestamps).length > 0 && options.timestamps.dark && options.timestamps.light) {
+				// Use timestamps
 				options.default = this.__checkTimestamps(options, now);
 			}
 		}
@@ -48,6 +49,7 @@ export default class darken {
 			});
 		}
 		else if (Object.keys(options.timestamps).length > 0 && options.timestamps.dark && options.timestamps.light) {
+			// Use timestamps
 			options.default = this.__checkTimestamps(options, now);
 		}
 
@@ -97,14 +99,14 @@ export default class darken {
 
 	}
 
-	// handle click on toggle button
+	// Handle click on toggle button
 	__handleClick(e) {
 		e.preventDefault();
 		// Toggles dark mode
 		this.toggle();
 	}
 
-	// checks match media and return corresponding default
+	// Checks match media and return corresponding default
 	__checkMatchMedia() {
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			return "dark";
@@ -116,9 +118,20 @@ export default class darken {
 		return undefined
 	}
 
-	__checkTimestamps(options, now) {
-		normalizeTimestamps(options.timestamps);
-		if ((options.timestamps.dark < now && now > options.timestamps.light) || (options.timestamps.dark > now && now < options.timestamps.light)) {
+	// Normalize timestamps object to Date objects
+	__normalizeTimestamps(timestamps) {
+		for (let [key, value] of Object.entries(timestamps)) {
+			let date = new Date();
+			let time = value.split(':');
+			date.setHours(time[0], time[1], 0, 0);
+			timestamps[key] = date;
+		}
+	}
+
+	// Checks timestamps and return corresponding default
+	__checkTimestamps(options, date) {
+		this.__normalizeTimestamps(options.timestamps);
+		if ((options.timestamps.dark < date && date > options.timestamps.light) || (options.timestamps.dark > date && date < options.timestamps.light)) {
 			return "dark";
 		}
 		return "light";
@@ -141,14 +154,5 @@ export default class darken {
 	off() {
 		this.dark = false;
 		document.dispatchEvent(new Event('darken-light'));
-	}
-}
-
-function normalizeTimestamps(timestamps) {
-	for (let [key, value] of Object.entries(timestamps)) {
-		let date = new Date();
-		let time = value.split(':');
-		date.setHours(time[0], time[1], 0, 0);
-		timestamps[key] = date;
 	}
 }
