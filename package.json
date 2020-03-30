@@ -22,11 +22,22 @@
     "jest": "^25.1.0",
     "microbundle": "^0.11.0"
   },
+  "files": [
+    "dist/**/*",
+    "src/index.d.ts",
+    "src/index.js"
+  ],
   "source": "src/index.js",
   "types": "src/index.d.ts",
   "main": "dist/darken.js",
   "browser": "dist/darken.umd.js",
   "module": "dist/darken.mjs",
   "unpkg": "dist/darken.umd.js",
-  "dependencies": {}
+  "dependencies": {},
+  "keywords": [
+    "dark", 
+    "mode", 
+    "darkmode", 
+    "darken"
+  ]
 }

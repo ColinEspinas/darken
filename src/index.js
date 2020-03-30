@@ -15,10 +15,12 @@ export default class darken {
 			remember: "darken-mode",
 			usePrefersColorScheme: true,
 			class: "darken",
+			timestamps: {},
 			variables: {},
 		}, options);
 
 		this.dark = false;
+		let now = new Date();
 
 		// Get preference from local storage
 		if (options.remember) {
@@ -29,6 +31,10 @@ export default class darken {
 			else if (options.usePrefersColorScheme) {
 				// Use prefers-color-scheme media query
 				options.default = this.__checkMatchMedia() || options.default
+			}
+			else if (Object.keys(options.timestamps).length > 0 && options.timestamps.dark && options.timestamps.light) {
+				// Use timestamps
+				options.default = this.__checkTimestamps(options, now);
 			}
 		}
 		else if (options.usePrefersColorScheme) {
@@ -41,6 +47,10 @@ export default class darken {
 			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => {
 				if (e.matches) this.off();
 			});
+		}
+		else if (Object.keys(options.timestamps).length > 0 && options.timestamps.dark && options.timestamps.light) {
+			// Use timestamps
+			options.default = this.__checkTimestamps(options, now);
 		}
 
 		// Add click listener on toggle element if possible
@@ -89,14 +99,14 @@ export default class darken {
 
 	}
 
-	// handle click on toggle button
+	// Handle click on toggle button
 	__handleClick(e) {
 		e.preventDefault();
 		// Toggles dark mode
 		this.toggle();
 	}
 
-	// checks match media and return corresponding default
+	// Checks match media and return corresponding default
 	__checkMatchMedia() {
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			return "dark";
@@ -106,6 +116,25 @@ export default class darken {
 		}
 
 		return undefined
+	}
+
+	// Normalize timestamps object to Date objects
+	__normalizeTimestamps(timestamps) {
+		for (let [key, value] of Object.entries(timestamps)) {
+			let date = new Date();
+			let time = value.split(':');
+			date.setHours(time[0], time[1], 0, 0);
+			timestamps[key] = date;
+		}
+	}
+
+	// Checks timestamps and return corresponding default
+	__checkTimestamps(options, date) {
+		this.__normalizeTimestamps(options.timestamps);
+		if ((options.timestamps.dark < date && date > options.timestamps.light) || (options.timestamps.dark > date && date < options.timestamps.light)) {
+			return "dark";
+		}
+		return "light";
 	}
 
 	// Toggle dark mode
