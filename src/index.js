@@ -15,6 +15,7 @@ export default class darken {
 			remember: "darken-mode",
 			usePrefersColorScheme: true,
 			class: "darken",
+			stylesheets: {},
 			timestamps: {},
 			variables: {},
 		}, options);
@@ -89,6 +90,9 @@ export default class darken {
 					else element.style.setProperty(key, value[this.dark ? 'dark' : 'light']);
 				}
 			}
+			// Set stylesheet
+			this.__changeStylesheet(options.stylesheets.id, options.stylesheets[this.dark ? 'dark' : 'light']);
+
 			// Set active mode in local storage
 			if (options.remember) {
 				localStorage.setItem(options.remember, this.dark ? "dark" : "light");
@@ -125,6 +129,25 @@ export default class darken {
 			let time = value.split(':');
 			date.setHours(time[0], time[1], 0, 0);
 			timestamps[key] = date;
+		}
+	}
+
+	// Change stylesheet with id "darken-stylesheet"
+	__changeStylesheet(id, path) {
+		let stylesheet = document.head.querySelector("#" + id || "#darken-stylesheet");
+		if (stylesheet) {
+			if (path) stylesheet.href = path;
+			else document.head.removeChild(stylesheet);
+		}
+		else {
+			if (path) {
+				stylesheet = document.createElement("link");
+				stylesheet.id = id || "darken-stylesheet";
+				stylesheet.rel = 'stylesheet';
+				stylesheet.type = 'text/css';
+				stylesheet.href = path;
+				document.head.appendChild(stylesheet);
+			}
 		}
 	}
 
