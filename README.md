@@ -16,6 +16,7 @@ Written in plain vanilla javascript.
 * Easy control over your dark mode
 * Custom class on dark mode
 * Switch CSS variables values on light/dark modes
+* Switch between different stylesheets on light/dark modes
 * Use prefers-color-scheme to get user preference
 * Use timestamps to change modes at chosen times
 * Save user preference to local storage
@@ -97,6 +98,7 @@ const defaultOptions = {
 	timestamps: {},
 	class: "darken",
 	variables: {},
+	stylesheets: {},
 }
 ```
 
@@ -130,6 +132,21 @@ If this option is set to `null` the active mode is not stored.
 If `true` the `prefers-color-scheme` media query will be used to determine the default mode.
 
 If the `remember` option is active, this will only be used if no active mode is stored (in most case the first time a user comes to the app/website). If the `remember` option is not active then a listener will be added to the `prefers-color-scheme` media query for live update.
+
+### stylesheets
+*Type: `Object`*, *Default: `{}`*
+
+Define the stylesheet path of each mode. This stylesheet `href` will be changed on mode switch dynamically. The stylesheet will be removed if no path is given for a mode.
+
+Default stylesheet `id` is `darken-stylesheet` but can be changed.
+
+```javascript
+stylesheets: {
+	id: "darkmode-stylesheet",
+	dark: "dark.css",
+	light: "light.css",
+}
+```
 
 ### timestamps
 *Type: `Object`*, *Default: `{}`*
