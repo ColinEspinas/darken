@@ -44,7 +44,7 @@ Just use this snippet to include darken to your code:
 ```html
 <script src="https://unpkg.com/darken"></script>
 <script>
-	const darkmode = new darken();
+	const darkmode = new Darken();
 </script>
 ```
 
@@ -57,9 +57,9 @@ npm install darken
 
 And import it in your code:
 ```javascript
-import darken from 'darken';
+import Darken from 'darken';
 
-const darkmode = new darken();
+const darkmode = new Darken();
 ```
 
 ## Usage
@@ -72,7 +72,7 @@ Here is a basic usage of darken:
 
 <script src="path/to/darken"></script>
 <script>
-	const darkmode = new darken({
+	const darkmode = new Darken({
 		class: "darkmode-active",
 		variables: {
 			"--primary-color" : ["#000000", "#fafafa"],
@@ -209,7 +209,7 @@ variables: {
 The `darken` class is the entry point to the library.
 
 ```javascript
-const darkmode = new darken(options, callback);
+const darkmode = new Darken(options, callback);
 ```
 
 See details about options [above](#options). The `options` are optional.
@@ -217,7 +217,7 @@ See details about options [above](#options). The `options` are optional.
 The `callback` method will be called at every mode switch with a `active` boolean parameter. The `callback` is optional.
 
 ```javascript
-const darkmode = new darken(function(active) {
+const darkmode = new Darken(function(active) {
 	if (active) console.log("Dark mode is active");
 	else console.log("Dark mode is inactive");
 });
