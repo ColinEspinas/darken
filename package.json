@@ -1,6 +1,6 @@
 {
   "name": "darken",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Darkmode made easy",
   "scripts": {
     "build": "microbundle --sourcemap false",
@@ -35,9 +35,9 @@
   "unpkg": "dist/darken.umd.js",
   "dependencies": {},
   "keywords": [
-    "dark", 
-    "mode", 
-    "darkmode", 
+    "dark",
+    "mode",
+    "darkmode",
     "darken"
   ]
 }
