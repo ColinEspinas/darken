@@ -1,0 +1,11 @@
+{
+    "shiki": {
+        "provider": "skypack"
+    },
+    "sunup": {
+        "url": "https://cdn.jsdelivr.net/gh/colinespinas/sunup@master/src/sunup.js"
+    },
+    "darken": {
+        "provider": "skypack"
+    }
+}

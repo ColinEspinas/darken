@@ -1,0 +1,1 @@
+export * from 'https://cdn.skypack.dev/shiki'; export { default } from 'https://cdn.skypack.dev/shiki';
