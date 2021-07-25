@@ -44,7 +44,7 @@ Just use this snippet to include darken to your code:
 ```html
 <script src="https://unpkg.com/darken"></script>
 <script>
-	const darkmode = new darken();
+	const darkmode = new Darken();
 </script>
 ```
 
@@ -57,9 +57,9 @@ npm install darken
 
 And import it in your code:
 ```javascript
-import darken from 'darken';
+import Darken from 'darken';
 
-const darkmode = new darken();
+const darkmode = new Darken();
 ```
 
 ## Usage
@@ -72,7 +72,7 @@ Here is a basic usage of darken:
 
 <script src="path/to/darken"></script>
 <script>
-	const darkmode = new darken({
+	const darkmode = new Darken({
 		class: "darkmode-active",
 		variables: {
 			"--primary-color" : ["#000000", "#fafafa"],
@@ -261,6 +261,8 @@ If you want to test while developing, another command triggers the watch mode (B
 ```sh
 npm run test:watch
 ```
+
+> Tests are not up to date, check the [related issue](https://github.com/ColinEspinas/darken/issues/24) if you want to help updating them.
 
 <!-- CONTRIBUTING -->
 ## Contributing
