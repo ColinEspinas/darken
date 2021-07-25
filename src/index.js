@@ -90,6 +90,9 @@ export default class darken {
 					else element.style.setProperty(key, value[this.dark ? 'dark' : 'light']);
 				}
 			}
+			// Set color-scheme to root
+			document.documentElement.style.setProperty('color-scheme', this.dark ? 'dark' : 'light');
+
 			// Set stylesheet
 			this.__changeStylesheet(options.stylesheets.id, options.stylesheets[this.dark ? 'dark' : 'light']);
 
