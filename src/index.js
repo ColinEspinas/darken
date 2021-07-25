@@ -1,5 +1,5 @@
 // Darken class
-export default class darken {
+export default class Darken {
 	constructor(options, callback) {
 
 		if (typeof options === "function") {
