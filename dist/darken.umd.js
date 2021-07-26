@@ -1,1 +1,191 @@
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.darken=t()}(this,function(){var e=function(e,t){var r=this;"function"==typeof e&&(t=e,e={}),e=Object.assign({container:null,default:"light",toggle:null,remember:"darken-mode",usePrefersColorScheme:!0,class:"darken",stylesheets:{},timestamps:{},variables:{}},e),this.dark=!1;var a=new Date;e.remember?localStorage.getItem(e.remember)?e.default=localStorage.getItem(e.remember):e.usePrefersColorScheme?e.default=this.__checkMatchMedia()||e.default:Object.keys(e.timestamps).length>0&&e.timestamps.dark&&e.timestamps.light&&(e.default=this.__checkTimestamps(e,a)):e.usePrefersColorScheme?(e.default=this.__checkMatchMedia()||e.default,window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){e.matches&&r.on()}),window.matchMedia("(prefers-color-scheme: light)").addListener(function(e){e.matches&&r.off()})):Object.keys(e.timestamps).length>0&&e.timestamps.dark&&e.timestamps.light&&(e.default=this.__checkTimestamps(e,a)),e.toggle&&document.querySelector(e.toggle).addEventListener("click",this.__handleClick.bind(this)),document.addEventListener("darken-dark",this.__handleDarkenEvent(e,t,"add"),!1),document.addEventListener("darken-light",this.__handleDarkenEvent(e,t,"remove"),!1),"light"===e.default?this.off():"dark"===e.default&&this.on()};return e.prototype.__handleDarkenEvent=function(e,t,r){var a=this;return function(){e.container?document.querySelector(e.container).classList[r](e.class):document.body.classList[r](e.class);for(var n=e.container?document.querySelector(e.container):document.documentElement,s=0,i=Object.entries(e.variables);s<i.length;s+=1){var o=i[s],d=o[0],c=o[1];c&&"object"==typeof c&&(Array.isArray(c)?n.style.setProperty(d,a.dark?c[1]:c[0]):n.style.setProperty(d,c[a.dark?"dark":"light"]))}a.__changeStylesheet(e.stylesheets.id,e.stylesheets[a.dark?"dark":"light"]),e.remember&&localStorage.setItem(e.remember,a.dark?"dark":"light"),"function"==typeof t&&t(a.dark)}},e.prototype.__handleClick=function(e){e.preventDefault(),this.toggle()},e.prototype.__checkMatchMedia=function(){return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":window.matchMedia("(prefers-color-scheme: light)").matches?"light":void 0},e.prototype.__normalizeTimestamps=function(e){for(var t=0,r=Object.entries(e);t<r.length;t+=1){var a=r[t],n=a[0],s=a[1],i=new Date,o=s.split(":");i.setHours(o[0],o[1],0,0),e[n]=i}},e.prototype.__changeStylesheet=function(e,t){var r=document.head.querySelector("#"+e||"#darken-stylesheet");r?t?r.href=t:document.head.removeChild(r):t&&((r=document.createElement("link")).id=e||"darken-stylesheet",r.rel="stylesheet",r.type="text/css",r.href=t,document.head.appendChild(r))},e.prototype.__checkTimestamps=function(e,t){return this.__normalizeTimestamps(e.timestamps),e.timestamps.dark<t&&t>e.timestamps.light||e.timestamps.dark>t&&t<e.timestamps.light?"dark":"light"},e.prototype.toggle=function(){this.dark=!this.dark,this.dark?document.dispatchEvent(new Event("darken-dark")):document.dispatchEvent(new Event("darken-light"))},e.prototype.on=function(){this.dark=!0,document.dispatchEvent(new Event("darken-dark"))},e.prototype.off=function(){this.dark=!1,document.dispatchEvent(new Event("darken-light"))},e});
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Darken = factory());
+}(this, (function () { 'use strict';
+
+	// Darken class
+	class Darken {
+		constructor(options, callback) {
+
+			if (typeof options === "function") {
+				callback = options;
+				options = {};
+			}
+
+			// Default Options
+			options = Object.assign({
+				container: null,
+				default: "light",
+				toggle: null,
+				remember: "darken-mode",
+				usePrefersColorScheme: true,
+				class: "darken",
+				stylesheets: {},
+				timestamps: {},
+				variables: {},
+			}, options);
+
+			this.dark = false;
+			let now = new Date();
+
+			// Get preference from local storage
+			if (options.remember) {
+				if (localStorage.getItem(options.remember)) {
+					options.default = localStorage.getItem(options.remember);
+				}
+				// If no preference is found in storage
+				else if (options.usePrefersColorScheme) {
+					// Use prefers-color-scheme media query
+					options.default = this.__checkMatchMedia() || options.default;
+				}
+				else if (Object.keys(options.timestamps).length > 0 && options.timestamps.dark && options.timestamps.light) {
+					// Use timestamps
+					options.default = this.__checkTimestamps(options, now);
+				}
+			}
+			else if (options.usePrefersColorScheme) {
+				// Use prefers-color-scheme media query
+				options.default = this.__checkMatchMedia() || options.default;
+				// Add listeners on prefers-color-scheme media query
+				window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+					if (e.matches) this.on();
+				});
+				window.matchMedia('(prefers-color-scheme: light)').addListener((e) => {
+					if (e.matches) this.off();
+				});
+			}
+			else if (Object.keys(options.timestamps).length > 0 && options.timestamps.dark && options.timestamps.light) {
+				// Use timestamps
+				options.default = this.__checkTimestamps(options, now);
+			}
+
+			// Add click listener on toggle element if possible
+			if (options.toggle) {
+				document.querySelector(options.toggle).addEventListener('click', this.__handleClick.bind(this));
+			}
+
+			// Listen to darken-dark events and apply dark mode on event
+			document.addEventListener('darken-dark', this.__handleDarkenEvent(options, callback, 'add'), false);
+
+			// Listen to darken-light events and apply light mode on event
+			document.addEventListener('darken-light', this.__handleDarkenEvent(options, callback, 'remove'), false);
+
+			// Get default mode and turn dark mode on/off
+			if (options.default === "light") {
+				this.off();
+			}
+			else if (options.default === "dark") {
+				this.on();
+			}
+		}
+
+		// Handle darken events
+		__handleDarkenEvent(options, callback, action) {
+			//Returning the function, to pass arguments but not execute the business logic
+			return () => {
+				if (options.container) document.querySelector(options.container).classList[action](options.class);
+				else document.body.classList[action](options.class);
+
+				const element = (options.container) ? document.querySelector(options.container) : document.documentElement;
+				// Loop through CSS variables
+				for (let [key, value] of Object.entries(options.variables)) {
+					// Set CSS variable on light value
+					if (value && typeof value === "object") {
+						if (Array.isArray(value)) element.style.setProperty(key, this.dark ? value[1] : value[0]);
+						else element.style.setProperty(key, value[this.dark ? 'dark' : 'light']);
+					}
+				}
+				// Set stylesheet
+				this.__changeStylesheet(options.stylesheets.id, options.stylesheets[this.dark ? 'dark' : 'light']);
+
+				// Set active mode in local storage
+				if (options.remember) {
+					localStorage.setItem(options.remember, this.dark ? "dark" : "light");
+				}
+				// Call callback giving the active mode as parameter
+				if (typeof callback === "function") callback(this.dark);
+			}
+
+		}
+
+		// Handle click on toggle button
+		__handleClick(e) {
+			e.preventDefault();
+			// Toggles dark mode
+			this.toggle();
+		}
+
+		// Checks match media and return corresponding default
+		__checkMatchMedia() {
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				return "dark";
+			}
+			else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+				return "light";
+			}
+
+			return undefined
+		}
+
+		// Normalize timestamps object to Date objects
+		__normalizeTimestamps(timestamps) {
+			for (let [key, value] of Object.entries(timestamps)) {
+				let date = new Date();
+				let time = value.split(':');
+				date.setHours(time[0], time[1], 0, 0);
+				timestamps[key] = date;
+			}
+		}
+
+		// Change stylesheet with id "darken-stylesheet"
+		__changeStylesheet(id, path) {
+			let stylesheet = document.head.querySelector("#" + id || "#darken-stylesheet");
+			if (stylesheet) {
+				if (path) stylesheet.href = path;
+				else document.head.removeChild(stylesheet);
+			}
+			else {
+				if (path) {
+					stylesheet = document.createElement("link");
+					stylesheet.id = id || "darken-stylesheet";
+					stylesheet.rel = 'stylesheet';
+					stylesheet.type = 'text/css';
+					stylesheet.href = path;
+					document.head.appendChild(stylesheet);
+				}
+			}
+		}
+
+		// Checks timestamps and return corresponding default
+		__checkTimestamps(options, date) {
+			this.__normalizeTimestamps(options.timestamps);
+			if ((options.timestamps.dark < date && date > options.timestamps.light) || (options.timestamps.dark > date && date < options.timestamps.light)) {
+				return "dark";
+			}
+			return "light";
+		}
+
+		// Toggle dark mode
+		toggle() {
+			this.dark = !this.dark;
+			if (this.dark) document.dispatchEvent(new Event('darken-dark'));
+			else document.dispatchEvent(new Event('darken-light'));
+		}
+
+		// Set dark mode to active
+		on() {
+			this.dark = true;
+			document.dispatchEvent(new Event('darken-dark'));
+		}
+
+		// Set dark mode to inactive
+		off() {
+			this.dark = false;
+			document.dispatchEvent(new Event('darken-light'));
+		}
+	}
+
+	return Darken;
+
+})));
