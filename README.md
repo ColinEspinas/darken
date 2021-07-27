@@ -1,10 +1,9 @@
 # darken
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c113e5acfef64430ae0db6917a78b612)](https://app.codacy.com/manual/ColinEspinas/darken?utm_source=github.com&utm_medium=referral&utm_content=ColinEspinas/darken&utm_campaign=Badge_Grade_Dashboard)
-[![Size badge](https://img.shields.io/bundlephobia/min/darken)](https://bundlephobia.com/result?p=darken)
-[![Npm badge](https://img.shields.io/npm/v/darken)](https://www.npmjs.com/package/darken)
-[![Issue Badge](https://img.shields.io/github/issues/colinespinas/darken)](https://github.com/ColinEspinas/darken/issues)
-[![Licence Badge](https://img.shields.io/github/license/colinespinas/darken)](https://github.com/ColinEspinas/darken/blob/master/LICENSE)
+[![Size badge](https://img.shields.io/bundlephobia/min/darken?style=for-the-badge)](https://bundlephobia.com/result?p=darken)
+[![Npm badge](https://img.shields.io/npm/v/darken?style=for-the-badge)](https://www.npmjs.com/package/darken)
+[![Issue Badge](https://img.shields.io/github/issues/colinespinas/darken?style=for-the-badge)](https://github.com/ColinEspinas/darken/issues)
+[![Licence Badge](https://img.shields.io/github/license/colinespinas/darken?style=for-the-badge)](https://github.com/ColinEspinas/darken/blob/master/LICENSE)
 
 A **lightweight and cross-browser** library that allows you to easely **manage your dark mode** for your websites and applications. 
 
@@ -280,22 +279,18 @@ Any help and contribution is always welcome, feel free to submit issues and/or c
 <!-- LICENSE -->
 ## License
 
-darken is distributed under the MIT License. See `LICENSE` for more information.
+Darken is distributed under the MIT License. See `LICENSE` for more information.
 
 
 
 <!-- CONTACT -->
 ## Contact
-[![Buy me a coffee badge](https://img.shields.io/badge/-Buy%20me%20a%20coffee-important?logo=buy%20me%20a%20coffee&logoColor=white)](https://www.buymeacoffee.com/ColinEspinas)
-[![LinkedIn badge](https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555)](https://www.linkedin.com/in/colin-espinas-9739b8178/l)
 
-Colin Espinas - [Website](https://colinespinas.com) - contact@colinespinas.com
+I am **Colin Espinas** you can contact me using my
 
-Project link: [https://github.com/ColinEspinas/darken](https://github.com/ColinEspinas/darken)
+[![Website](https://img.shields.io/badge/-website-brightgreen?style=for-the-badge)](https://colinespinas.com/contact)
+[![Website](https://img.shields.io/badge/email-contact@colinespinas.com-orange?style=for-the-badge)](mailto:contact@colinespinas.com)
+[![Website](https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/colin-espinas)
+[![Website](https://img.shields.io/badge/-Github-lightgrey?style=for-the-badge&logo=github)](https://github.com/ColinEspinas)
 
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* [microbundler](https://github.com/developit/microbundle)
+This project source's are at [https://github.com/ColinEspinas/darken](https://github.com/ward-framework/darken).
