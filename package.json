@@ -3,8 +3,8 @@
   "version": "1.5.0",
   "description": "Darkmode made easy",
   "scripts": {
-    "build": "microbundle --sourcemap false",
-    "dev": "microbundle watch --sourcemap false",
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
     "test": "jest --coverage=true",
     "test:watch": "jest --watch --coverage=false"
   },
@@ -14,13 +14,9 @@
     "url": "https://github.com/ColinEspinas/darken.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "babel-jest": "^25.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-jest": "^23.8.0",
-    "jest": "^25.1.0",
-    "microbundle": "^0.11.0"
+    "jest": "^27.0.6",
+    "rollup": "^2.54.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "files": [
     "dist/**/*",
@@ -29,11 +25,9 @@
   ],
   "source": "src/index.js",
   "types": "src/index.d.ts",
-  "main": "dist/darken.js",
-  "browser": "dist/darken.umd.js",
-  "module": "dist/darken.mjs",
-  "unpkg": "dist/darken.umd.js",
-  "dependencies": {},
+  "main": "dist/darken.min.js",
+  "module": "dist/darken.min.mjs",
+  "unpkg": "dist/darken.umd.min.js",
   "keywords": [
     "dark",
     "mode",
