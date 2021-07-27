@@ -102,7 +102,7 @@ export default class Darken {
       }
       // Call callback giving the active mode as parameter
       if (typeof callback === "function") callback(this.dark);
-    }
+    };
   }
 
   // Handle click on toggle button
