@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Darken Demo</title>
 	<link rel="stylesheet" href="style.css">
-	<script src="https://unpkg.com/darken"></script>
+	<script src="../dist/darken.umd.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 		</header>
 	</div>
 	<script>
-		const darkmode = new darken({
+		const darkmode = new Darken({
 			toggle: "#dm-toggle",
 			variables: {
 				"--primary-color": ["#ffffff", "#000000"],
