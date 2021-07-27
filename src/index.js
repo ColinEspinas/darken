@@ -32,7 +32,7 @@ export default class Darken {
       // If no preference is found in storage
       else if (options.usePrefersColorScheme) {
         // Use prefers-color-scheme media query
-        options.default = this.#checkMatchMedia() || options.default
+        options.default = this.#checkMatchMedia() || options.default;
       }
       else if (Object.keys(options.timestamps).length > 0 && options.timestamps.dark && options.timestamps.light) {
         // Use timestamps
