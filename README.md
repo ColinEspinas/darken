@@ -205,10 +205,10 @@ variables: {
 
 ## API
 
-The `darken` class is the entry point to the library.
+The `Darken` class is the entry point to the library.
 
 ```javascript
-const darkmode = new darken(options, callback);
+const darkmode = new Darken(options, callback);
 ```
 
 See details about options [above](#options). The `options` are optional.
@@ -216,7 +216,7 @@ See details about options [above](#options). The `options` are optional.
 The `callback` method will be called at every mode switch with a `active` boolean parameter. The `callback` is optional.
 
 ```javascript
-const darkmode = new darken(function(active) {
+const darkmode = new Darken(function(active) {
 	if (active) console.log("Dark mode is active");
 	else console.log("Dark mode is inactive");
 });

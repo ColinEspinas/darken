@@ -7,7 +7,12 @@ export default class darken {
     remember: string | null;
     usePrefersColorScheme: boolean;
     class: string;
-    variables: object;
+    variables: object | [];
+    stylesheets: {
+      id: string;
+      light: string;
+      dark: string;
+    };
   }, callback?: (active: boolean) => void);
   toggle(): void;
   on(): void;
